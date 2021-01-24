@@ -1,5 +1,5 @@
 class Equipment < ApplicationRecord
-  CATEGORY = %w[brass guitar keyboard percussion strings woodwind equipment]
+  CATEGORY = %w[brass guitar keyboard percussion strings woodwind equipment turntable]
   belongs_to :user
   has_many :bookings
   validates :ad_name, presence: true
