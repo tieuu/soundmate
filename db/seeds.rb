@@ -5,3 +5,32 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts "deleting stuff"
+Equipment.destroy_all
+User.destroy_all
+puts "adding stuff"
+
+10.times do
+  User.create!(
+    email: Faker::Internet.email,
+    name: Faker::Internet.username,
+    address: Faker::Address.full_address,
+    phone_number: Faker::PhoneNumber.phone_number,
+    password: Faker::Alphanumeric.alpha(number: 10)
+  )
+end
+
+User.all.each do |user|
+  2.times do (
+    Equipment.create!(
+      description: Faker::Lorem.paragraph(sentence_count: 3),
+      ad_name: Faker::Lorem.sentence,
+      category: Equipment::CATEGORY.sample,
+      price: rand(10_000.00..100_000.00).round(2),
+      active: true,
+      user_id: user.id
+    ))
+  end
+end
+
+puts "done"
