@@ -9,7 +9,7 @@
 <ul>
 
   <% @equipment.each do |equipment| %>
-    <% if equipment.active %>
+    <% if equipment.active && equipment.user != current_user %>
       <li>
         <%= link_to equipment.ad_name, equipment_path(equipment) %> - <%= equipment.category %>
       </li>
