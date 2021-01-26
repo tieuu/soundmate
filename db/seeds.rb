@@ -10,15 +10,37 @@ Equipment.destroy_all
 User.destroy_all
 puts "adding stuff"
 
-10.times do
-  User.create!(
-    email: Faker::Internet.email,
-    name: Faker::Internet.username,
-    address: Faker::Address.full_address,
-    phone_number: Faker::PhoneNumber.phone_number,
-    password: Faker::Alphanumeric.alpha(number: 10)
-  )
-end
+User.create!(
+  email: "dan@gmail.com",
+  name: "dan",
+  address: Faker::Address.full_address,
+  phone_number: Faker::PhoneNumber.phone_number,
+  password: "soundmate1"
+)
+
+User.create!(
+  email: "julian@gmail.com",
+  name: "julian",
+  address: Faker::Address.full_address,
+  phone_number: Faker::PhoneNumber.phone_number,
+  password: "soundmate2"
+)
+
+User.create!(
+  email: "tieu@gmail.com",
+  name: "tieu",
+  address: Faker::Address.full_address,
+  phone_number: Faker::PhoneNumber.phone_number,
+  password: "soundmate3"
+)
+
+User.create!(
+  email: "vincent@gmail.com",
+  name: "vincent",
+  address: Faker::Address.full_address,
+  phone_number: Faker::PhoneNumber.phone_number,
+  password: "soundmate4"
+)
 
 User.all.each do |user|
   2.times do (
