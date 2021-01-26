@@ -1,0 +1,13 @@
+<h1><%= @equipment.category %></h1>
+<ul>
+    <li><%= @equipment.description %></li>
+    <li><%= @equipment.price %></li>
+    <ul><% @equipment.bookings.each do |booking| %>
+      <li><%= booking %> </li>
+      <% end %>
+    </ul>
+</ul>
+
+<%= link_to 'Make a booking', new_booking %>
+
+<%= link_to 'Back to list', equipment_index_path %>
