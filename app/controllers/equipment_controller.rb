@@ -1,5 +1,4 @@
 class EquipmentController < ApplicationController
-
   def index
     @equipment = Equipment.search(params[:search]) || Equipment.all
   end

@@ -42,8 +42,18 @@ User.create!(
   password: "soundmate4"
 )
 
+10.times do
+  User.create!(
+    email: Faker::Internet.email,
+    name: Faker::Internet.username,
+    address: Faker::Address.full_address,
+    phone_number: Faker::PhoneNumber.phone_number,
+    password: Faker::Alphanumeric.alpha(number: 10)
+  )
+end
+
 User.all.each do |user|
-  2.times do (
+  3.times do (
     Equipment.create!(
       description: Faker::Lorem.paragraph(sentence_count: 3),
       ad_name: Faker::Lorem.sentence,
@@ -53,6 +63,19 @@ User.all.each do |user|
       user_id: user.id
     ))
   end
+end
+
+15.times do (
+  booking = Booking.create(
+    status: Booking::STATUS.sample,
+    start_date: DateTime.now + rand(5..10),
+    end_date: DateTime.now + rand(11..15),
+    equipment_id: Equipment.all.sample,
+    booking.user = nil
+    until booking.equipment.user != booking.user do
+      booking.user = User.all.sample
+    end
+  ))
 end
 
 puts "done"
