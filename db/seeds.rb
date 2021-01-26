@@ -6,9 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "deleting stuff"
+
+Booking.destroy_all
 Equipment.destroy_all
 User.destroy_all
-puts "adding stuff"
+
+puts "adding users"
 
 User.create!(
   email: "dan@gmail.com",
@@ -52,8 +55,10 @@ User.create!(
   )
 end
 
+puts "adding Equipment"
+
 User.all.each do |user|
-  3.times do (
+  2.times do (
     Equipment.create!(
       description: Faker::Lorem.paragraph(sentence_count: 3),
       ad_name: Faker::Lorem.sentence,
@@ -65,17 +70,34 @@ User.all.each do |user|
   end
 end
 
+puts "adding Bookings"
+
 15.times do (
-  booking = Booking.create(
-    status: Booking::STATUS.sample,
+  booking = Booking.new(
+    status: Booking::STATUS[0..-2].sample,
     start_date: DateTime.now + rand(5..10),
     end_date: DateTime.now + rand(11..15),
-    equipment_id: Equipment.all.sample,
-    booking.user = nil
-    until booking.equipment.user != booking.user do
-      booking.user = User.all.sample
-    end
-  ))
+    equipment: Equipment.all.sample
+  )
+  until booking.user && booking.equipment.user != booking.user do
+    booking.user = User.all.sample
+  end
+  booking.save!
+)
+end
+
+5.times do (
+  booking = Booking.new(
+    status: Booking::STATUS[-1],
+    start_date: DateTime.now - rand(15..30),
+    end_date: DateTime.now - rand(5..14),
+    equipment: Equipment.all.sample
+  )
+  until booking.user && booking.equipment.user != booking.user do
+    booking.user = User.all.sample
+  end
+  booking.save!
+)
 end
 
 puts "done"
