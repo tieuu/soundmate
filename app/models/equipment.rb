@@ -7,6 +7,7 @@ class Equipment < ApplicationRecord
   validates :description, presence: true
   validates :active, presence: true
   validates :price, presence: true
+  has_many_attached :photos
 
   def self.search(search)
     return unless search
