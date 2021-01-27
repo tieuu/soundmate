@@ -1,11 +1,13 @@
 class BookingsController < ApplicationController
 
-    def new
+  def new
     @equipment = Equipment.find(params[:equipment_id])
     @booking = Booking.new
-    end
+    authorize @booking
+    authorize @equipment
+  end
 
-    def create
+  def create
     @booking = Booking.new(booking_params)
     @booking.equipment = Equipment.find(params[:equipment_id])
     @booking.user = current_user
@@ -14,7 +16,14 @@ class BookingsController < ApplicationController
     @booking.status = "pending"
     binding.pry
     @booking.save
-    end
+  end
+
+  def show
+    @equipment = Equipment.find(params[:equipment_id])
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    authorize @equipment
+  end
 
   private
 
