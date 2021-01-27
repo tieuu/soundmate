@@ -1,7 +1,6 @@
 class EquipmentController < ApplicationController
   def index
-    @equipment = policy_scope(Equipment.search(params[:search]) || Equipment)
-    authorize @equipment
+    @equipments = policy_scope(Equipment.search(params[:search]) || Equipment)
   end
 
   def show
