@@ -12,7 +12,6 @@ class BookingsController < ApplicationController
     # @booking.start_date = params[:start_date]
     # @booking.end_date = params[:end_date]
     @booking.status = "pending"
-    binding.pry
     @booking.save
     end
 
