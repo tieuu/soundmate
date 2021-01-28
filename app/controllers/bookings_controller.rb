@@ -21,9 +21,8 @@ class BookingsController < ApplicationController
     end
   end
 
-  def show
-    @booking = Booking.find(params[:id])
-    authorize @booking
+  def index
+    @bookings = policy_scope(Booking).order(created_at: :desc)
   end
 
   private
