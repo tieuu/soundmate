@@ -1,10 +1,8 @@
 .banner {
-  height: 100%;
   background-size: cover;
-  width: 100%;
-  background-blend-mode: luminosity;
   background-position: center;
-  padding: 300px 0;
+  padding: 120px 0;
+  width: 100%;
 }
 
 .banner h1 {
@@ -13,6 +11,9 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   font-size: 32px;
   font-weight: bold;
+  font-style: italic;
+  font-family: 'Exo 2', sans-serif;
+
 }
 
 .banner p {
@@ -22,5 +23,3 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
-.container {
-}
