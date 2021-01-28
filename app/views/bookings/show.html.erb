@@ -1,7 +1,10 @@
 <h1>Booking ID: <%= @booking.id %></h1>
 <ul>
-  <li>Equipment booked: <%= @equipment.category %></li>
+  <li>Equipment booked: <%= @booking.equipment.category %></li>
   <li>Status: <%= @booking.status %></li>
-  <li>Start date: <%= @booking.start_date %> </li>
-  <li>End date: <%= @booking.end_date %> </li>
+  <li>Start date: <%= l(@booking.start_date.to_date, format: :long) %> </li>
+  <li>End date: <%= l(@booking.end_date.to_date, format: :long) %> </li>
 </ul>
+<br>
+<%= link_to 'Back to list', equipment_index_path %>
+<br>
