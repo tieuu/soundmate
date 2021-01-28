@@ -1,4 +1,4 @@
-<h1>Offers List</h1>
+<div><h1>Offers List</h1>
 
 <%= simple_form_for :search, url: equipment_index_path, method: :get do |f| %>
   <%= f.input :query,
@@ -10,18 +10,25 @@
               prompt: 'Search by Category' %>
   <button type="submit" class='btn btn-primary'><%= icon('fas','search') %> Search</button>
 <% end %>
+</div>
 
-<ul>
+<h2>Musical Equipment Available</h2>
 
   <% @equipments.each do |equipment| %>
     <% if equipment.active && equipment.user != current_user %>
-      <li>
-        <%= link_to equipment.ad_name, equipment_path(equipment) %> - <%= equipment.category %>
-      </li>
+  <div class="card" style="width: 18rem;">
+    <img src="" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title text-primary"> <%= equipment.ad_name %> </h5>
+      <p class="card-text"> <%= equipment.category %> </p>
+      <button class="btn btn-primary"><%= link_to "Reserve", equipment_path(equipment) %></button>
+    </div>
+  </div>
     <% end %>
   <% end %>
 
-</ul>
+
+
 
 <%= link_to 'Back to list', equipment_index_path unless params[:search] == nil %>
 <br>
