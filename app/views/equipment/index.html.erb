@@ -12,20 +12,24 @@
 <% end %>
 </div>
 
-<h2>Musical Equipment Available</h2>
 
+<h2 class="m-3">Musical Equipment Available</h2>
+
+<div class="row row-cols-1 row-cols-md-3 d-flex">
   <% @equipments.each do |equipment| %>
     <% if equipment.active && equipment.user != current_user %>
-  <div class="card" style="width: 18rem;">
-    <img src="" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title text-primary"> <%= equipment.ad_name %> </h5>
-      <p class="card-text"> <%= equipment.category %> </p>
-      <button class="btn btn-primary"><%= link_to "Reserve", equipment_path(equipment) %></button>
+    <div class="col mb-3">
+      <div class="card bg-dark h-100 w-200 border border-white" style="width: 18rem;">
+          <div class="card-body">
+            <h3 class="card-title"> <%= equipment.ad_name %> </h3>
+            <p class="card-text text-white"> <%= equipment.category %> </p>
+            <button class="btn btn-primary"><%= link_to "Reserve", equipment_path(equipment) %></button>
+          </div>
+      </div>
     </div>
-  </div>
     <% end %>
   <% end %>
+</div>
 
 
 
