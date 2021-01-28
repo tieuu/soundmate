@@ -1,20 +1,30 @@
 class BookingsController < ApplicationController
-
-    def new
+  def new
     @equipment = Equipment.find(params[:equipment_id])
     @booking = Booking.new
-    end
+    authorize @booking
+    authorize @equipment
+  end
 
-    def create
+  def create
     @booking = Booking.new(booking_params)
     @booking.equipment = Equipment.find(params[:equipment_id])
     @booking.user = current_user
-    # @booking.start_date = params[:start_date]
-    # @booking.end_date = params[:end_date]
     @booking.status = "pending"
-    binding.pry
-    @booking.save
+    @equipment = @booking.equipment
+    authorize @equipment
+    authorize @booking
+    if @booking.save
+      redirect_to booking_path(@booking)
+    else
+      render :new
     end
+  end
+
+  def show
+    @booking = Booking.find(params[:id])
+    authorize @booking
+  end
 
   private
 

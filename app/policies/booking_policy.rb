@@ -1,4 +1,4 @@
-class EquipmentPolicy < ApplicationPolicy
+class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -6,10 +6,6 @@ class EquipmentPolicy < ApplicationPolicy
   end
 
   def create?
-    true
-  end
-
-  def index?
     true
   end
 

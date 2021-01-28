@@ -5,8 +5,7 @@ class Equipment < ApplicationRecord
   validates :ad_name, presence: true
   validates :category, presence: true, inclusion: { in: CATEGORY }
   validates :description, presence: true
-  validates :active, presence: true
-  validates :price, presence: true
+  validates :price, presence: true, numericality: { greater_than: 0 }
   has_many_attached :photos
 
   def self.search(search)
