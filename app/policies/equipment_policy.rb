@@ -16,4 +16,8 @@ class EquipmentPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def my_equipment?
+    true
+  end
 end
