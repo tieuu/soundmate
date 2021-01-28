@@ -6,9 +6,8 @@
 // General style
 $font-family-sans-serif:  $body-font;
 $headings-font-family:    $headers-font;
-$body-bg:                 $black;
-$font-size-base: 1rem;
-$font-color-light:        $white;
+$body-bg:                 $dark;
+
 
 // Colors
 $body-color: $gray;
@@ -17,8 +16,8 @@ $success:    $green;
 $info:       $yellow;
 $danger:     $red;
 $warning:    $orange;
-$dark:       $black;
-$white:      $white;
+$black:      $dark;
+$white:      $light;
 
 // Buttons & inputs' radius
 $border-radius:    2px;
@@ -26,6 +25,3 @@ $border-radius-lg: 2px;
 $border-radius-sm: 2px;
 
 // Override other variables below!
-$link-color:                              $white !default;
-$headings-color:                          $white !default;
-// $h5-color:                              $primary !default;
