@@ -1,9 +1,14 @@
 <h1>Offers List</h1>
 
 <%= simple_form_for :search, url: equipment_index_path, method: :get do |f| %>
-  <%= f.input :query, label: false, placeholder: 'Search for ...' %>
-  <%= f.input :category, collection: Equipment::CATEGORY, label: false, placeholder: 'Search by Category' %>
-  <button type="submit"><%= icon('fas','search') %> Search</button>
+  <%= f.input :query,
+              label: false,
+              placeholder: 'Search for ...' %>
+  <%= f.input :category,
+              collection: Equipment::CATEGORY,
+              label: false,
+              prompt: 'Search by Category' %>
+  <button type="submit" class='btn btn-primary'><%= icon('fas','search') %> Search</button>
 <% end %>
 
 <ul>
