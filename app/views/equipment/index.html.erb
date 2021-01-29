@@ -1,37 +1,45 @@
-<div><h1>Offers List</h1>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="col-4 home-body" id="short">
+    <h1 class="banner">Offers list</h1>
+  </div>
 
-<%= simple_form_for :search, url: equipment_index_path, method: :get do |f| %>
-  <%= f.input :query,
-              label: false,
-              placeholder: 'Search for ...' %>
-  <%= f.input :category,
-              collection: Equipment::CATEGORY,
-              label: false,
-              prompt: 'Search by Category' %>
-  <button type="submit" class='btn btn-primary'><%= icon('fas','search') %> Search</button>
-<% end %>
-</div>
-
-
-<h2 class="m-3">Musical Equipment Available</h2>
-
-<div class="row row-cols-1 row-cols-md-3 d-flex">
-  <% @equipments.each do |equipment| %>
-    <% if equipment.active && equipment.user != current_user %>
-    <div class="col mb-3">
-      <div class="card bg-dark h-100 w-200 border border-white" style="width: 18rem;">
-          <div class="card-body">
-            <h3 class="card-title"> <%= equipment.ad_name %> </h3>
-            <p class="card-text text-white"> <%= equipment.category %> </p>
-            <button class="btn btn-primary"><%= link_to "Reserve", equipment_path(equipment) %></button>
-          </div>
-      </div>
+  <div class="col-4" id="padding-left">
+    <%= simple_form_for :search, url: equipment_index_path, method: :get do |f| %>
+    <div class="form-inputs">
+    <%= f.input :query,
+                label: false,
+                placeholder: 'Search for ...' %>
+    <%= f.input :category,
+                collection: Equipment::CATEGORY,
+                label: false,
+                prompt: 'Search by Category' %>
     </div>
-    <% end %>
+    <div class="form-actions">
+       <button type="submit" class='btn btn-outline-light btn-md'><%= icon('fas','search') %> Search</button>
+    </div>
   <% end %>
+  </div>
 </div>
 
-
-
-
-<%= link_to 'Back to list', equipment_index_path unless params[:search] == nil %>
+<div class="light-body">
+  <div class="container" id="add-padding">
+    <div class="cards">
+      <% @equipments.each do |equipment| %>
+        <% if equipment.active && equipment.user != current_user %>
+          <%= link_to equipment_path(equipment) do %>
+            <div class="card-trip card-category">
+              <img src=<%= @category[equipment.category] %>/>
+              <div class="card-trip-infos">
+                <div>
+                  <h2 id="black"><%= equipment.ad_name %></h2>
+                  <p id="black"><%= equipment.category.capitalize %></p>
+                </div>
+                <h2 class="card-trip-pricing" id="black"><%= number_with_delimiter(equipment.price.round, :delimiter => ',') %>￥/day</h2>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
