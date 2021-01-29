@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :equipment, only: [:index, :show, :create] do
     resources :bookings, only: [:new, :create, :edit, :update]
   end
-  
+
   resources :bookings, only: [:show, :index]
-  
+
   get "/my_equipment", to: "equipment#my_equipment"
 
 end
