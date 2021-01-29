@@ -1,6 +1,15 @@
-  .input-group>.input-group-prepend {
+.input-group>.input-group-prepend {
     flex: 0 0 20%;
 }
 .input-group .input-group-text {
     width: 100%;
+}
+
+#padding-left {
+  padding-left: 40px;
+}
+
+input, label {
+  color: #F78720 !important;
+  background-color: black !important;
 }
