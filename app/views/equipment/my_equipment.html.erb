@@ -28,12 +28,14 @@
   </div>
 </div>
 
+<hr>
+
 <div class="row">
   <% @equipments.each do |equipment| %>
     <div class="col-4">
       <div class="card my-3">
         <div class="card-trip">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+          <%= cl_image_tag('photo-1546872006-43d8f499a0e1_rewiff.jpg', crop: :fill) %>
           <div class="card-trip-infos">
             <div>
               <h2><%= link_to equipment.ad_name, equipment_path(equipment), class: "stretched-link" %></h2>
