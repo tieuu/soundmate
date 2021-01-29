@@ -1,14 +1,24 @@
-<h1>My bookings</h1>
-<br>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="col-6 home-body" id="short">
+    <h1 class="banner">My bookings</h1>
+  </div>
+</div>
 
-<% @bookings.select { |booking| booking.user == current_user }.each do |booking| %>
-  <h2><%= link_to booking.equipment.ad_name, "equipment/#{booking.equipment_id}" %> - <%= booking.status %></h2>
-  <ul>
-    <li><%= booking.equipment.category %> booked from <%= booking.equipment.user.name %></li>
-    <li>from <%= l(booking.start_date.to_date, format: :long) %> to <%= l(booking.end_date.to_date, format: :long) %> </li>
-  </ul>
-<% end %>
-
-<br>
-  <%= link_to 'Back to list', equipment_index_path %>
-<br>
+<div class="light-body">
+  <div class="container" id="add-padding">
+    <div class="card-trip-infos">
+      <% @bookings.select { |booking| booking.user == current_user }.sort_by{ |booking| booking.start_date }.each do |booking| %>
+        <div class="card-product">
+          <img src=<%= @category[booking.equipment.category] %>/>
+          <div class="card-product-infos">
+            <h2><%= link_to booking.equipment.ad_name, "equipment/#{booking.equipment_id}", class: "link" %> - <%= booking.status.capitalize %></h2>
+            <p><%= booking.equipment.category.capitalize %> from <%= booking.equipment.user.name.capitalize %></p>
+            <p><%= l(booking.start_date.to_date, format: :long) %> to <%= l(booking.end_date.to_date, format: :long) %></p>
+            <p><%= number_with_delimiter((booking.equipment.price.round * (booking.end_date.to_date - booking.start_date.to_date)).round, :delimiter => ',') %>￥ total</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to 'Back to list', equipment_index_path, class: "link", id: "small" %>
+  </div>
+</div>
