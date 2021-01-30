@@ -1,5 +1,5 @@
-<div class="d-flex justify-content-center align-items-center">
-  <div class="col-4 home-body" id="short">
+<div class="d-flex justify-content-center align-items-center home-body">
+  <div class="col-4" id="short">
     <h1 class="banner">Offers list</h1>
   </div>
 
@@ -21,12 +21,12 @@
   </div>
 </div>
 
-<div class="light-body">
+<div class="home-body">
   <div class="container" id="add-padding">
-    <div class="cards">
+    <div class="row">
       <% @equipments.each do |equipment| %>
         <% if equipment.active && equipment.user != current_user %>
-          <%= link_to equipment_path(equipment) do %>
+          <%= link_to equipment_path(equipment), class: 'col-12 col-md-6 col-lg-4 my-3 no-decoration' do %>
             <div class="card-trip card-category">
               <% unless equipment.photos.attached? %>
                 <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
