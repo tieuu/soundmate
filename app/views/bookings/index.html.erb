@@ -10,11 +10,14 @@
       <% @bookings.select { |booking| booking.user == current_user }.sort_by{ |booking| booking.start_date }.each do |booking| %>
         <div class="card-product">
           <img src=<%= @category[booking.equipment.category] %>/>
-          <div class="card-product-infos">
-            <h2><%= link_to booking.equipment.ad_name, "equipment/#{booking.equipment_id}", class: "link" %> - <%= booking.status.capitalize %></h2>
-            <p><%= booking.equipment.category.capitalize %> from <%= booking.equipment.user.name.capitalize %></p>
-            <p><%= l(booking.start_date.to_date, format: :long) %> to <%= l(booking.end_date.to_date, format: :long) %></p>
-            <p><%= ActiveSupport::NumberHelper.number_to_currency((booking.equipment.price.round * (booking.end_date.to_date - booking.start_date.to_date)).round, locale: :ja) %>/day</p>
+          <div class="card-trip-infos card-product-infos">
+            <div>
+              <h2><%= link_to booking.equipment.ad_name, "equipment/#{booking.equipment_id}", class: "link" %> - <%= booking.status.capitalize %></h2>
+              <p><%= booking.equipment.category.capitalize %> from <%= booking.equipment.user.name.capitalize %></p>
+              <p><%= l(booking.start_date.to_date, format: :long) %> to <%= l(booking.end_date.to_date, format: :long) %></p>
+              <p><%= ActiveSupport::NumberHelper.number_to_currency((booking.equipment.price.round * (booking.end_date.to_date - booking.start_date.to_date)).round, locale: :ja) %>/day</p>
+            </div>
+            <button type="submit" class='btn btn-outline-dark btn-md' id='cancel'>Cancel</button>
           </div>
         </div>
       <% end %>
