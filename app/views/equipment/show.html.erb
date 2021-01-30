@@ -2,7 +2,7 @@
   <div class="container py-5">
     <div class="row">
       <% if @equipment.active && @equipment.user != current_user %>
-        <div class="col-sm justify-content-center">
+        <div class="col-md justify-content-center">
       <% else %>
         <div class="justify-content-center">
       <% end %>
@@ -14,10 +14,10 @@
             <% else %>
               <%= cl_image_tag(@equipment.photos.first.key, crop: :fill) %>
             <% end %>
-            <p> <%= @equipment.description %> </p>
-            <p> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day </p>
-            <p> Rented by:<%= @equipment.user.name %> </p>
-            <p> Location:<%= @equipment.user.address %> </p>
+            <p><%= @equipment.description %></p>
+            <p><%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day</p>
+            <p>Rented by: <%= @equipment.user.name %></p>
+            <p>Location: Tokyo</p>
           </div>
         </div>
 
