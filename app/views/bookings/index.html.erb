@@ -12,7 +12,7 @@
           <% unless booking.equipment.photos.attached? %>
             <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
           <% else %>
-            <%= cl_image_tag(booking.equipment.photos.first, crop: :fill) %>
+            <%= cl_image_tag(booking.equipment.photos.first.key, crop: :fill) %>
           <% end %>
           <div class="card-trip-infos card-product-infos">
             <div>
