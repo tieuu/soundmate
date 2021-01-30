@@ -16,6 +16,8 @@
             <% end %>
             <p> <%= @equipment.description %> </p>
             <p> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day </p>
+            <p> Rented by:<%= @equipment.user.name %> </p>
+            <p> Location:<%= @equipment.user.address %> </p>
           </div>
         </div>
 
