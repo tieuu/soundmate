@@ -1,32 +1,33 @@
-<div class="home-body">
-  <div class="main-container">
-    <div class="container text-center-padding">
-      <h1 class="col-13"> SoundMate </h1>
+<div class="home-body home-font-size">
+  <div class="container">
+    <div class="home-banner">
+      <div class="row">
+        <h1 class="col-12 col-lg-7"> SoundMate </h1>
+      </div>
+      <div class="container text-center-padding" >
+        <% if user_signed_in? %>
+          <%= link_to 'Check out all equipment nearby', equipment_index_path, class: "btn btn-outline-light btn-lg" %>
+        <% else %>
+          <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-outline-light btn-lg" %>
+          <%= link_to 'Log in', new_user_session_path, class: "btn btn-outline-light btn-lg" %>
+        <% end %>
+      </div>
     </div>
+  </div>
 
-    <div class="container text-center-padding" >
-      <% if user_signed_in? %>
-        <%= link_to 'Check out all equipment nearby', equipment_index_path, class: "btn btn-outline-light btn-lg" %>
-      <% else %>
-        <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-outline-light btn-lg" %>
-        <%= link_to 'Log in', new_user_session_path, class: "btn btn-outline-light btn-lg" %>
-      <% end %>
-    </div>
+  <div class="container text-center-padding" >
+    <p>Book instruments and audio equipment from people near you</p>
+  </div>
 
-    <div class="container text-center-padding" >
-      <p>Book instruments and audio equipment from people near you</p>
-    </div>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/deumrs4dd/image/upload/v1611836628/pexels-stephen-niemeier-63703_apntj4.jpg)"></div>
 
-    <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/deumrs4dd/image/upload/v1611836628/pexels-stephen-niemeier-63703_apntj4.jpg)"></div>
+  <div class="container text-center-padding">
+    <p>Rent instruments you don't use</p>
+  </div>
 
-    <div class="container text-center-padding">
-      <p>Rent instruments you don't use</p>
-    </div>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/deumrs4dd/image/upload/v1611836711/pexels-photo-65718_g7scnj.jpg)"></div>
 
-    <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/deumrs4dd/image/upload/v1611836711/pexels-photo-65718_g7scnj.jpg)"></div>
-
-    <div class="container text-center-padding" >
-      <p>Discover like minded sound mates with <%= link_to 'SOUNDMATE', new_user_session_path, class: "btn btn-outline-light " %></p>
-    </div>
+  <div class="container text-center-padding" >
+    <p>Discover like minded sound mates with <%= link_to 'SOUNDMATE', new_user_session_path, class: "btn btn-outline-light " %></p>
   </div>
 </div>
