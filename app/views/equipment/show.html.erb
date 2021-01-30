@@ -1,13 +1,22 @@
-<h1><%= @equipment.category %></h1>
-<ul>
-  <li><%= @equipment.description %></li>
-  <li><%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day</li>
-  <ul><% @equipment.bookings.each do |booking| %>
-      <li> Booking No.<%= booking.id %> </li>
-    <% end %>
-  </ul>
-</ul>
+<div class="main-container-show">
+    <h1>Showing <%= @equipment.category %> details</h1>
 
-<%= link_to 'Make a booking', new_equipment_booking_path(@equipment) unless @equipment.user == current_user%>
+    <div class="card-equipment">
+          <img src=<%= @category[@equipment.category] %>/>
 
+           <p> <%= @equipment.description %> </p>
+               <p> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day </p>
+                <h2><% @equipment.bookings.each do |booking| %></h2>
+                <% end %>
+
+      </div>
+
+    <h1>Book <%= @equipment.category %></h1>
+
+<%= simple_form_for [@equipment, @booking] do |f|  %>
+  <%= f.input :start_date, as: :date, html5: true %>
+  <%= f.input :end_date, as: :date, html5: true %>
+  <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md" %>
+<% end %>
 <%= link_to 'Back to list', equipment_index_path %>
+</div>
