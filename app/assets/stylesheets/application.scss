@@ -11,3 +11,11 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+a.no-decoration {
+  text-decoration: none;
+  &:hover, &:active, &:focus {
+    transform: scale(1.05);
+    transition: transform 0.6s 0.4s;
+  }
+}

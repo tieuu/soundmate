@@ -1,32 +1,32 @@
-<div class="d-flex justify-content-center align-items-center">
-  <div class="col-4 home-body" id="short">
+<div class="d-flex justify-content-center align-items-center home-body">
+  <div class="col-4" id="short">
     <h1 class="banner">Offers list</h1>
   </div>
 
   <div class="col-4" id="padding-left">
     <%= simple_form_for :search, url: equipment_index_path, method: :get do |f| %>
-    <div class="form-inputs">
-    <%= f.input :query,
+      <div class="form-inputs">
+        <%= f.input :query,
                 label: false,
                 placeholder: 'Search for ...' %>
-    <%= f.input :category,
+        <%= f.input :category,
                 collection: Equipment::CATEGORY,
                 label: false,
                 prompt: 'Search by Category' %>
-    </div>
-    <div class="form-actions">
-       <button type="submit" class='btn btn-outline-light btn-md'><%= icon('fas','search') %> Search</button>
-    </div>
-  <% end %>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class='btn btn-outline-light btn-md'><%= icon('fas','search') %> Search</button>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<div class="light-body">
+<div class="home-body">
   <div class="container" id="add-padding">
-    <div class="cards">
+    <div class="row">
       <% @equipments.each do |equipment| %>
         <% if equipment.active && equipment.user != current_user %>
-          <%= link_to equipment_path(equipment) do %>
+          <%= link_to equipment_path(equipment), class: 'col-12 col-md-6 col-lg-4 my-3 no-decoration' do %>
             <div class="card-trip card-category">
               <img src=<%= @category[equipment.category] %>/>
               <div class="card-trip-infos">
