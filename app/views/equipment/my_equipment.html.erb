@@ -1,39 +1,39 @@
 <div class="home-body">
-<div class="d-flex justify-content-center align-items-center">
-  <div class="col-4 pt-5" id="short">
-    <h1 class="banner" style="font-size: 54px;"><%= current_user.name.capitalize %>'s Equipment List</h1>
-  </div>
-  <div class="col-6 mt-5" id="padding-left">
-    <div class="col-10 mx-auto">
-      <%= simple_form_for @equipment, wrapper: :input_group do |f| %>
-        <%= f.input :category,
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="col-4 pt-5" id="short">
+      <h1 class="banner" style="font-size: 54px;"><%= current_user.name.capitalize %>'s Equipment List</h1>
+    </div>
+    <div class="col-6 mt-5" id="padding-left">
+      <div class="col-10 mx-auto">
+        <%= simple_form_for @equipment, wrapper: :input_group do |f| %>
+          <%= f.input :category,
                 collection: Equipment::CATEGORY,
                 label: false,
                 prepend: 'Category' %>
-        <%= f.input :ad_name,
+          <%= f.input :ad_name,
                 label: false,
                 prepend: 'Name'%>
-        <%= f.input :description,
+          <%= f.input :description,
                 label: false,
                 prepend: 'Description' %>
-        <%= f.input :price,
+          <%= f.input :price,
                 label: false,
                 prepend: 'Rent price',
                 append: '¥ / day' %>
-        <%= f.input :photos,
+          <%= f.input :photos,
                 as: :file,
                 label: false,
                 input_html: { multiple: true } %>
-        <%= f.input :active,
+          <%= f.input :active,
                 wrapper: :custom_boolean_switch,
                 label: 'Check to Start Renting Now' %>
-        <%= f.submit 'Add', class: 'btn btn-primary' %>
-      <% end %>
+          <%= f.submit 'Add', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 
-<hr>
+  <hr>
 
   <div class="container" id="add-padding">
     <div class="card-trip-infos">
@@ -52,6 +52,5 @@
         </div>
       <% end %>
     </div>
-    <%= link_to 'Back to list', equipment_index_path, class: "link", id: "small" %>
   </div>
 </div>
