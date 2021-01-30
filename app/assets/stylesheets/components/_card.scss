@@ -85,10 +85,18 @@
 
 .link {
   color: black;
+  line-height: 1.4;
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding-top: 20px;
 }
 
 #small {
   font-size: 20px;
+}
+
+#cancel {
+  margin-top: 20px;
 }
 
 // Smallest device
