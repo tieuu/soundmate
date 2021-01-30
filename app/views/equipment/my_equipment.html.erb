@@ -39,7 +39,11 @@
     <div class="card-trip-infos">
       <% @equipments.select { |equipment| equipment.user == current_user }.each do |equipment| %>
         <div class="card-product">
-          <img src=<%= @category[equipment.category] %>/>
+          <% unless equipment.photos.attached? %>
+            <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
+          <% else %>
+            <%= cl_image_tag(equipment.photos.first, crop: :fill) %>
+          <% end %>
           <div class="card-product-infos">
             <h2><%= link_to equipment.ad_name, "equipment/#{equipment.id}", class: "link" %> </h2>
             <p><%= equipment.category.capitalize %> from <%= equipment.user.name.capitalize %></p>
