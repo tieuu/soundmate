@@ -2,7 +2,11 @@
     <h1>Showing <%= @equipment.category %> details</h1>
 
     <div class="card-equipment">
-          <img src=<%= @category[@equipment.category] %>/>
+      <% unless @equipment.photos.attached? %>
+        <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
+          <% else %>
+            <%= cl_image_tag(@equipment.photos.first, crop: :fill) %>
+      <% end %>
 
            <p> <%= @equipment.description %> </p>
                <p> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day </p>
