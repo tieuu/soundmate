@@ -9,7 +9,11 @@
     <div class="card-trip-infos">
       <% @bookings.select { |booking| booking.user == current_user }.sort_by{ |booking| booking.start_date }.each do |booking| %>
         <div class="card-product">
-          <img src=<%= @category[booking.equipment.category] %>/>
+          <% unless booking.equipment.photos.attached? %>
+            <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
+          <% else %>
+            <%= cl_image_tag(booking.equipment.photos.first, crop: :fill) %>
+          <% end %>
           <div class="card-trip-infos card-product-infos">
             <div>
               <h2><%= link_to booking.equipment.ad_name, "equipment/#{booking.equipment_id}", class: "link" %> - <%= booking.status.capitalize %></h2>
