@@ -1,25 +1,28 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <h1><%= @equipment.category %> details</h1>
-        
-      <div class="card-equipment">
-        <% unless @equipment.photos.attached? %>
-          <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
-        <% else %>
-          <%= cl_image_tag(@equipment.photos.first, crop: :fill) %>
+<div class="home-body body-height">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-sm justify-content-center">
+        <h2><%= @equipment.ad_name %> details</h2>
+
+        <div class="card-equipment">
+          <% unless @equipment.photos.attached? %>
+            <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
+          <% else %>
+            <%= cl_image_tag(@equipment.photos.first, crop: :fill) %>
+          <% end %>
+           <p> <%= @equipment.description %> </p>
+           <p> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day </p>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <h2>Book</h2>
+        <%= simple_form_for [@equipment, @booking] do |f|  %>
+          <%= f.input :start_date, as: :date, html5: true %>
+          <%= f.input :end_date, as: :date, html5: true %>
+          <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md" %>
         <% end %>
-         <p> <%= @equipment.description %> </p>
-         <p> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day </p>
       </div>
     </div>
-    
-    <div class="col-sm-4">
-      <h1>Book <%= @equipment.category %></h1>
-      <%= simple_form_for [@equipment, @booking] do |f|  %>
-        <%= f.input :start_date, as: :date, html5: true %>
-        <%= f.input :end_date, as: :date, html5: true %>
-        <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md" %>
-      <% end %>
-    </div>
   </div>
+</div>
