@@ -6,7 +6,7 @@ class EquipmentController < ApplicationController
   end
 
   def my_equipment
-    @equipments = Equipment.where(user: current_user)
+    @equipments = Equipment.where(user: current_user).order(created_at: :desc)
     authorize @equipments
 
     @equipment = Equipment.new
@@ -18,7 +18,7 @@ class EquipmentController < ApplicationController
     @equipment.user = current_user
     authorize @equipment
     if @equipment.save
-      redirect_to equipment_path(@equipment)
+      redirect_to :my_equipment
     else
       @equipments = Equipment.where(user: current_user)
       authorize @equipments
