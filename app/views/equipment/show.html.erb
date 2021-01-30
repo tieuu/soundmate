@@ -2,7 +2,7 @@
   <div class="container py-5">
     <div class="row">
       <div class="col-sm justify-content-center">
-        <h2><%= @equipment.ad_name %> details</h2>
+        <h2><%= @equipment.ad_name %></h2>
 
         <div class="card-equipment">
           <% unless @equipment.photos.attached? %>
@@ -12,6 +12,9 @@
           <% end %>
           <p> <%= @equipment.description %> </p>
           <p> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day </p>
+          <p> Rented by:<%= @equipment.user.name %> </p>
+          <p> Location:<%= @equipment.user.address %> </p>
+
         </div>
       </div>
 
