@@ -1,8 +1,9 @@
-<div class="d-flex justify-content-center align-items-center home-body">
-  <div class="col-4" id="short">
+<div class="home-body">
+<div class="d-flex justify-content-center align-items-center">
+  <div class="col-4 pt-5" id="short">
     <h1 class="banner" style="font-size: 54px;"><%= current_user.name.capitalize %>'s Equipment List</h1>
   </div>
-  <div class="col-6" id="padding-left">
+  <div class="col-6 mt-5" id="padding-left">
     <div class="col-10 mx-auto">
       <%= simple_form_for @equipment, wrapper: :input_group do |f| %>
         <%= f.input :category,
@@ -34,7 +35,6 @@
 
 <hr>
 
-<div class="home-body">
   <div class="container" id="add-padding">
     <div class="card-trip-infos">
       <% @equipments.select { |equipment| equipment.user == current_user }.each do |equipment| %>
