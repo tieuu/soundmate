@@ -1,5 +1,8 @@
-<div class="main-container-show">
-  <h1>Showing <%= @equipment.category %> details</h1>
+<div class="home-body body-height">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-sm justify-content-center">
+        <h2><%= @equipment.ad_name %> details</h2>
 
   <div class="card-equipment">
     <% unless @equipment.photos.attached? %>
@@ -13,11 +16,14 @@
 
   <h1>Book <%= @equipment.category %></h1>
 
-  <%= simple_form_for [@equipment, @booking] do |f|  %>
-    <%= f.input :start_date, as: :date, html5: true %>
-    <%= f.input :end_date, as: :date, html5: true %>
-    <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md" %>
-  <% end %>
-
-  <%= link_to 'Back to list', equipment_index_path %>
+      <div class="col-sm-4">
+        <h2>Book</h2>
+        <%= simple_form_for [@equipment, @booking] do |f|  %>
+          <%= f.input :start_date, as: :date, html5: true %>
+          <%= f.input :end_date, as: :date, html5: true %>
+          <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
