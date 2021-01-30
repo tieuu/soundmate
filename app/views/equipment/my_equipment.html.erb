@@ -1,5 +1,5 @@
-<div class="d-flex justify-content-center align-items-center">
-  <div class="col-4 home-body" id="short">
+<div class="d-flex justify-content-center align-items-center home-body">
+  <div class="col-4" id="short">
     <h1 class="banner" style="font-size: 54px;"><%= current_user.name.capitalize %>'s Equipment List</h1>
   </div>
   <div class="col-6" id="padding-left">
@@ -34,7 +34,7 @@
 
 <hr>
 
-<div class="light-body">
+<div class="home-body">
   <div class="container" id="add-padding">
     <div class="card-trip-infos">
       <% @equipments.select { |equipment| equipment.user == current_user }.each do |equipment| %>
