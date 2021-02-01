@@ -49,19 +49,19 @@
 
 .card-product img {
   height: 100%;
-  width: 300px;
+  width: 200px;
   object-fit: cover;
 }
 
 .card-product h2 {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bold;
   margin: 0;
   color: black;
 }
 
 .card-product p {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;
@@ -121,8 +121,4 @@
 
 #small {
   font-size: 20px;
-}
-
-#cancel {
-  margin-top: 20px;
 }

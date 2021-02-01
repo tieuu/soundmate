@@ -70,34 +70,4 @@ User.all.each do |user|
   end
 end
 
-puts "adding Bookings"
-
-15.times do (
-  booking = Booking.new(
-    status: Booking::STATUS[0..-2].sample,
-    start_date: DateTime.now + rand(5..10),
-    end_date: DateTime.now + rand(11..15),
-    equipment: Equipment.all.sample
-  )
-  until booking.user && booking.equipment.user != booking.user do
-    booking.user = User.all.sample
-  end
-  booking.save!
-)
-end
-
-5.times do (
-  booking = Booking.new(
-    status: Booking::STATUS[-1],
-    start_date: DateTime.now - rand(15..30),
-    end_date: DateTime.now - rand(5..14),
-    equipment: Equipment.all.sample
-  )
-  until booking.user && booking.equipment.user != booking.user do
-    booking.user = User.all.sample
-  end
-  booking.save!
-)
-end
-
 puts "done"

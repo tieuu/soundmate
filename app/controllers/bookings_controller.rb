@@ -1,4 +1,10 @@
 class BookingsController < ApplicationController
+  before_action :set_booking, only: [:update]
+
+  def index
+    @bookings = policy_scope(Booking).order(created_at: :desc)
+  end
+
   def create
     @booking = Booking.new(booking_params)
     @booking.equipment = Equipment.find(params[:equipment_id])
@@ -14,13 +20,22 @@ class BookingsController < ApplicationController
     end
   end
 
-  def index
-    @bookings = policy_scope(Booking).order(created_at: :desc)
+  def update
+    binding.pry
+    @booking.update(booking_params)
+    @bookings = Booking.all
+    authorize @bookings
+    redirect_to bookings_path
   end
 
   private
 
   def booking_params
-    params.require(:booking).permit(:equipment_id, :user_id, :start_date, :end_date)
+    params.require(:booking).permit(:equipment_id, :user_id, :start_date, :end_date, :status)
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
+    authorize @booking
   end
 end
