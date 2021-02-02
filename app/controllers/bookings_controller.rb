@@ -21,11 +21,14 @@ class BookingsController < ApplicationController
   end
 
   def update
-    raise
     @booking.update(status: params[:status])
-    @bookings = Booking.all
-    authorize @bookings
-    redirect_to bookings_path
+    if @booking.equipment.user == current_user
+      redirect_to equipment_path(@booking.equipment)
+    else
+      @bookings = Booking.all
+      authorize @bookings
+      redirect_to bookings_path
+    end
   end
 
   private

@@ -24,3 +24,7 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import { changeStatusColor } from '../components/_status_color';
+
+changeStatusColor();
+
