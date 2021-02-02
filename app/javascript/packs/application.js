@@ -24,3 +24,9 @@ require("channels")
 
 // External imports
 import "bootstrap";
+
+import { initMapbox } from '../plugins/init_mapbox';
+console.log('teststring')
+document.addEventListener('turbolinks:load', () => {
+  initMapbox();
+})
