@@ -1,48 +1,48 @@
-<div class="home-body">
-  <div class="container banner">
+<div class="container">
+  <div class="flick-title banner">
     <div class="row">
       <div class="col-10 offset-1 col-lg-8 offset-lg-2 my-3">
-        <h1 class='m-5'>Offers list</h1>
+        <h2 class='m-5'>Offers</h2>
       </div>
     </div>
     <div class="row">
-      <div class="col-6 offset-3 col-lg-4 offset-lg-4 my-3">
-        <%= simple_form_for :search, url: equipment_index_path, method: :get do |f| %>
+      <div class="col-8 offset-2 col-lg-6 offset-lg-3 my-3">
+        <%= simple_form_for :search, url: equipment_index_path, method: :get, wrapper: :input_group do |f| %>
           <%= f.input :query,
                 label: false,
-                placeholder: 'Search for ...' %>
+                prepend: 'Search for',
+                wrapper_html: {class: 'my-1'} %>
           <%= f.input :category,
                 collection: Equipment::CATEGORY,
                 label: false,
-                prompt: 'Search by Category' %>
+                prepend: 'Category',
+                wrapper_html: {class: 'my-1'} %>
           <button type="submit" class='btn btn-outline-light btn-md'><%= icon('fas','search') %> Search</button>
         <% end %>
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <% @equipments.each do |equipment| %>
-        <% if equipment.active && equipment.user != current_user %>
-          <%= link_to equipment_path(equipment), class: 'col-12 col-md-6 col-lg-4 my-3 no-decoration' do %>
-            <div class="card-trip card-category">
-              <% unless equipment.photos.attached? %>
-                <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
-              <% else %>
-                <%= cl_image_tag(equipment.photos.first.key, crop: :fill) %>
-              <% end %>
-              <div class="card-trip-infos">
-                <div>
-                  <h2 id="black"><%= equipment.ad_name %></h2>
-                  <p id="black"><%= equipment.category.capitalize %></p>
-                </div>
-                <h2 class="card-trip-pricing" id="black"><%= ActiveSupport::NumberHelper.number_to_currency(equipment.price, locale: :ja) %> / day</h2>
+  <div class="row pt-3">
+    <% @equipments.each do |equipment| %>
+      <% if equipment.active && equipment.user != current_user %>
+        <%= link_to equipment_path(equipment), class: 'col-12 col-md-6 col-lg-4 my-3 no-decoration' do %>
+          <div class="card-trip card-category">
+            <% unless equipment.photos.attached? %>
+              <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
+            <% else %>
+              <%= cl_image_tag(equipment.photos.first.key, crop: :fill) %>
+            <% end %>
+            <div class="card-trip-infos">
+              <div>
+                <h2 id="black"><%= equipment.ad_name %></h2>
+                <p id="black"><%= equipment.category.capitalize %></p>
               </div>
+              <h2 class="card-trip-pricing" id="black"><%= ActiveSupport::NumberHelper.number_to_currency(equipment.price, locale: :ja) %> / day</h2>
             </div>
-          <% end %>
+          </div>
         <% end %>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
