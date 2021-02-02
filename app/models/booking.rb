@@ -6,7 +6,8 @@ class Booking < ApplicationRecord
   validates :end_date, presence: true
   validates :start_date, :end_date, overlap: { scope: "equipment_id" }
   validates :status, inclusion: { in: STATUS }, presence: true
-  validate :end_date_valid?, :start_date_valid?
+  validate :end_date_valid?
+  validate :start_date_valid?, on: :create
 
   def start_date_valid?
     past = start_date.strftime("%m/%d/%Y") < Time.now.strftime("%m/%d/%Y")

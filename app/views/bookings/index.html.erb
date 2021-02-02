@@ -25,10 +25,9 @@
             <% end %>
             <div class="row mt-3">
               <h2 class='mx-3'><%= booking.status.capitalize %></h2>
-              <% if booking.start_date > Time.now %>
+              <% if booking.start_date > Time.now && booking.status != 'cancelled' %>
                 <%= simple_form_for booking, method: 'patch' do |f| %>
-                  <%= f.hidden_field :status, value: 'cancelled' %>
-                  <button type="submit" class='btn btn-outline-warning btn-md mx-3'>Cancel</button>
+                  <button type="submit" class='btn btn-outline-warning btn-md mx-3' value='cancelled' name='status'>Cancel</button>
                 <% end %>
               <% end %>
             </div>

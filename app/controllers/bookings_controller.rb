@@ -21,8 +21,8 @@ class BookingsController < ApplicationController
   end
 
   def update
-    binding.pry
-    @booking.update(booking_params)
+    raise
+    @booking.update(status: params[:status])
     @bookings = Booking.all
     authorize @bookings
     redirect_to bookings_path
