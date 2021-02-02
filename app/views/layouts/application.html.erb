@@ -11,15 +11,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
 
-  <body class="bg-dark text-light">
+  <body>
 
     <% unless current_page?(root_path) || current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
-      <%= yield %>
-    <% else %>
-      <%= yield %>
     <% end %>
+    <%= yield %>
 
   </body>
 </html>
