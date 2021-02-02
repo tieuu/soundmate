@@ -1,11 +1,26 @@
-<div class="container py-5">
+<div class="container">
+
+  <%# Equipment ad_name on top %>
+  <div class="flick-title banner">
+    <div class="row">
+      <div class="col-10 offset-1 col-lg-8 offset-lg-2 my-3">
+        <h2 class='m-5'><%= @equipment.ad_name %>'s Equipment</h2>
+      </div>
+    </div>
+  </div>
+
+  <%# Put picture here %>
+  <%# could add carrousel form multipictures https://getbootstrap.com/docs/4.6/components/carousel/#with-indicators %>
   <div class="row">
-    <% if @equipment.active && @equipment.user != current_user %>
-      <div class="col-md justify-content-center">
+    <div class="justify-content-center">
+      <% unless @equipment.photos.attached? %>
+        <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
       <% else %>
-        <div class="justify-content-center">
-        <% end %>
-        <h2><%= @equipment.ad_name %> details</h2>
+        <%= cl_image_tag(@equipment.photos.first.key, crop: :fill) %>
+      <% end %>
+    </div>
+  </div>
+
 
         <div class="card-equipment">
           <% unless @equipment.photos.attached? %>
@@ -24,22 +39,21 @@
         </div>
       </div>
 
-      <% if @equipment.active && @equipment.user != current_user %>
-        <div class="col-sm-4">
-          <h2>Rental Period</h2>
-          <%= simple_form_for [@equipment, @booking] do |f|  %>
-            <%= f.input :start_date,
+
+  <% if @equipment.active && @equipment.user != current_user %>
+    <div class="col-sm-4">
+      <h2>Rental Period</h2>
+      <%= simple_form_for [@equipment, @booking] do |f|  %>
+        <%= f.input :start_date,
                         as: :date,
                         label: 'From',
                         html5: true%>
-            <%= f.input :end_date,
+        <%= f.input :end_date,
                         as: :date,
                         label: 'To (include)',
                         html5: true %>
-            <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md my-3" %>
-          <% end %>
-        </div>
+        <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md my-3" %>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
