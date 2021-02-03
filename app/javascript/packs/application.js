@@ -24,4 +24,3 @@ require("channels")
 
 // External imports
 import "bootstrap";
-import { DynamicCarousel } from '../components/carousel';
