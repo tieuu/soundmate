@@ -1,41 +1,50 @@
-<div class="container py-5">
-  <div class="row">
-    <% if @equipment.active && @equipment.user != current_user %>
-      <div class="col-md justify-content-center">
-      <% else %>
-        <div class="justify-content-center">
-        <% end %>
-        <h2><%= @equipment.ad_name %> details</h2>
-
-        <div class="card-equipment">
-          <% unless @equipment.photos.attached? %>
-            <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
-          <% else %>
-            <%= cl_image_tag(@equipment.photos.first.key, crop: :fill) %>
-          <% end %>
-          <p><%= @equipment.description %></p>
-          <p><%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %> / day</p>
-          <p>Rented by: <%= @equipment.user.name %></p>
-          <p>Location: Tokyo</p>
-        </div>
+<div class="container">
+  <div class="flick-title banner">
+    <div class="row">
+      <div class="col-10 offset-1 col-lg-8 offset-lg-2 my-3">
+        <h2 class='m-5'>Rent</h2>
       </div>
-
-      <% if @equipment.active && @equipment.user != current_user %>
-        <div class="col-sm-4">
-          <h2>Rental Period</h2>
-          <%= simple_form_for [@equipment, @booking] do |f|  %>
-            <%= f.input :start_date,
+    </div>
+  </div>
+  <div class="card-trip my-3" style="background: white;">
+    <div class="flex-container">
+      <ul class="list-group list-group-flush" style="width: 50%;">
+        <div class="card-header" style="background: white;">
+          <h1 class="text-center" id="black"><%= @equipment.ad_name %> </h1>
+        </div>
+        <li class="list-group-item border-0 text-center" id="black"> <%= @equipment.description %></li>
+        <li class="list-group-item border-top-0 text-center" id="black"> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %></li>
+        <li class="list-group-item border-top-0 border-bottom-0 text-center" id="black">Rented by: <%= @equipment.user.name %></li>
+        <li class="list-group-item border-bottom-0 text-center" id="black">Location: Tokyo</li>
+      </ul>
+      <% unless @equipment.photos.attached? %>
+        <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
+      <% else %>
+        <div class="flex-large">
+          <%= cl_image_tag(@equipment.photos.first.key, crop: :fill) %>
+        </div>
+        <div class="flex-small">
+          <%= cl_image_tag(@equipment.photos[1].key, crop: :fill) %>
+          <%= cl_image_tag(@equipment.photos[2].key, crop: :fill) %>
+          <%= link_to "See more pictures", @equipment_path %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if @equipment.active && @equipment.user != current_user %>
+    <div class="flex-container">
+      <div class="col-sm-4 text-center">
+        <h1>Rent now</h1>
+        <%= simple_form_for [@equipment, @booking] do |f|  %>
+          <%= f.input :start_date,
                         as: :date,
                         label: 'From',
                         html5: true%>
-            <%= f.input :end_date,
+          <%= f.input :end_date,
                         as: :date,
                         label: 'To (include)',
                         html5: true %>
-            <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md my-3" %>
-          <% end %>
-        </div>
+          <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md my-3" %>
+        <% end %>
       <% end %>
     </div>
-  </div>
-</div>

@@ -1,0 +1,56 @@
+<div class="container py-5">
+  <div class="row">
+    <% if @equipment.active && @equipment.user != current_user %>
+      <div class="col-md justify-content-center">
+      <% else %>
+        <div class="justify-content-center">
+        <% end %>
+
+        <div class="card-trip">
+            <h1 class="text-center" id="black"><%= @equipment.ad_name %> </h1>
+
+          <% unless @equipment.photos.attached? %>
+            <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
+          <% else %>
+          <div class="justify-content-center">
+
+            <div class="flex-container">
+              <div class ="flex-large">
+                <%= cl_image_tag(@equipment.photos.first.key, crop: :fill) %>
+             </div>
+          <div class ="flex-small">
+          <%= cl_image_tag(@equipment.photos[1].key, crop: :fill) %>
+          <%= cl_image_tag(@equipment.photos[2].key, crop: :fill) %>
+
+            </div>
+                  <% end %>
+                  </div>
+            </div>
+            <li class="list-group-item" id="black"> <%= @equipment.description %></li>
+            <li class="list-group-item" id="black"> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %></li>
+             <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="black">Rented by: <%= @equipment.user.name %></li>
+                <li class="list-group-item" id="black">Location: Tokyo</li>
+                </div>
+               </div>
+
+
+        </div>
+        <% if @equipment.active && @equipment.user != current_user %>
+        <div class="col-sm-4">
+          <h2>Rent now</h2>
+          <%= simple_form_for [@equipment, @booking] do |f|  %>
+            <%= f.input :start_date,
+                        as: :date,
+                        label: 'From',
+                        html5: true%>
+            <%= f.input :end_date,
+                        as: :date,
+                        label: 'To (include)',
+                        html5: true %>
+            <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md my-3" %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
