@@ -15,4 +15,10 @@ class Equipment < ApplicationRecord
                   using: {
                     tsearch: { prefix: true }
                   }
+
+  def status_check?
+    self.bookings.each do |booking|
+      return ['pending, confirmed'].include?(booking.status.downcase)
+    end
+  end
 end

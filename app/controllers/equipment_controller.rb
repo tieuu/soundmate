@@ -1,5 +1,5 @@
 class EquipmentController < ApplicationController
-  before_action :set_equipment, only: [:show]
+  before_action :set_equipment, only: [:show, :update]
 
   def index
     query = params[:search][:query]
@@ -40,6 +40,12 @@ class EquipmentController < ApplicationController
     authorize @booking
     authorize @equipment
     @marker = [{ lat: @equipment.user.latitude, lng: @equipment.user.longitude }]
+  end
+
+  def update
+    @equipment.update(active: params[:active])
+    authorize @equipment
+    redirect_to my_equipment_path
   end
 
   private
