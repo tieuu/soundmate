@@ -43,7 +43,7 @@
           <li class="list-group-item border-0 text-center" id="black"> <%= @equipment.description %></li>
           <li class="list-group-item border-top-0 text-center" id="black"> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %></li>
           <li class="list-group-item border-top-0 border-bottom-0 text-center" id="black">Rented by: <%= @equipment.user.name %></li>
-          <li class="list-group-item border-bottom-0 text-center" id="black">Location: Tokyo</li>
+          <li class="list-group-item border-bottom-0 text-center" id="black">Location: <%= @equipment.user.address %> </li>
           <% @equipment.reviews.each do |review| %>
             <li class="list-group-item border-bottom-0 text-center" id="black"><%= review.content %></li>
           <% end %>
