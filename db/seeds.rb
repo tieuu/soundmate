@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+STATIONS = %w(Nishidai, Meguro, Kamikegami, Tokamachi, Akita, Sapporo, Omaeda, Osawagara)
+
 puts "deleting stuff"
 
 Booking.destroy_all
@@ -16,7 +18,7 @@ puts "adding users"
 User.create!(
   email: "dan@gmail.com",
   name: "dan",
-  address: "Tokyo Station",
+  address: STATIONS.sample,
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate1"
 )
@@ -24,7 +26,7 @@ User.create!(
 User.create!(
   email: "julian@gmail.com",
   name: "julian",
-  address: Faker::Address.full_address,
+  address: STATIONS.sample,
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate2"
 )
@@ -32,7 +34,7 @@ User.create!(
 User.create!(
   email: "tieu@gmail.com",
   name: "tieu",
-  address: Faker::Address.full_address,
+  address: STATIONS.sample,
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate3"
 )
@@ -40,7 +42,7 @@ User.create!(
 User.create!(
   email: "vincent@gmail.com",
   name: "vincent",
-  address: Faker::Address.full_address,
+  address: STATIONS.sample,
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate4"
 )
