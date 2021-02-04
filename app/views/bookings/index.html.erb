@@ -25,7 +25,9 @@
             <% end %>
             <div class="row mt-3">
               <h2 class='mx-3'><%= booking.status.capitalize %></h2>
-              <% if booking.start_date > Time.now && booking.status != 'cancelled' %>
+              <% if booking.status == "returned" %>
+                <%= link_to 'Review', new_equipment_review_path(booking.equipment), class: 'btn btn-outline-warning btn-md mx-3' %>
+              <% elsif booking.start_date > Time.now && booking.status != 'cancelled' %>
                 <%= simple_form_for booking, method: 'patch' do |f| %>
                   <button type="submit" class='btn btn-outline-warning btn-md mx-3' value='cancelled' name='status'>Cancel</button>
                 <% end %>
