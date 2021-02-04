@@ -9,15 +9,10 @@ class Equipment < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than: 0 }
   has_many_attached :photos
 
-  def self.search(search)
-    return unless search
-
-    if search[:query].size.positive? && search[:category].size.positive?
-      Equipment.where('ad_name ILIKE ?', "%#{search[:query]}%").where(category: search[:category])
-    elsif search[:query].empty?
-      Equipment.where(category: search[:category])
-    else
-      Equipment.where('ad_name ILIKE ?', "%#{search[:query]}%")
-    end
-  end
+  include PgSearch::Model
+  pg_search_scope :search_equipment,
+                  against: %i[category description ad_name],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 end
