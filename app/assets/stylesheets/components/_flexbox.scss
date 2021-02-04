@@ -1,21 +1,43 @@
-
 .flex-container {
 display: flex;
-justify-content: center;
+justify-content: grow;
+padding: 10px
+
 }
 .flex-large {
   display: flex;
   width: 400px;
   height: 400px;
 }
+.flex-large img{
+  display: flex;
+  width: 400px;
+  height: 400px;
+    padding-right: 20px;
+
+
+}
 
 .flex-small {
   display: flex;
-  max-width: 50%;
   width: 200px;
   height: 200px;
-
   flex-direction: column;
+  justify-content: space-between;
 }
 
+.flex-small img {
+  display: flex;
+  width: 180px;
+  height: 180px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
+
+}
+
+.flex-container-bottom {
+display: flex;
+justify-content: space-around;
+padding-top: 10px;}
 
