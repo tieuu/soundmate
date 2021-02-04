@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-STATIONS = %w(Nishidai, Meguro, Kamikegami, Tokamachi, Akita, Sapporo, Omaeda, Osawagara)
 
 puts "deleting stuff"
 
@@ -18,7 +17,7 @@ puts "adding users"
 User.create!(
   email: "dan@gmail.com",
   name: "dan",
-  address: STATIONS.sample,
+  address: "Tokyo, Shinagawa City, Kamiosaki, 2-9-26",
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate1"
 )
@@ -26,7 +25,7 @@ User.create!(
 User.create!(
   email: "julian@gmail.com",
   name: "julian",
-  address: STATIONS.sample,
+  address: "Haneda Airport, Ota City, Tokyo",
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate2"
 )
@@ -34,7 +33,7 @@ User.create!(
 User.create!(
   email: "tieu@gmail.com",
   name: "tieu",
-  address: STATIONS.sample,
+  address: "6-3-9 Akasaka, Minato City, Tokyo",
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate3"
 )
@@ -42,25 +41,15 @@ User.create!(
 User.create!(
   email: "vincent@gmail.com",
   name: "vincent",
-  address: STATIONS.sample,
+  address: "3 Chome-1-1 Benten, Chuo Ward, Chiba",
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate4"
 )
 
-10.times do
-  User.create!(
-    email: Faker::Internet.email,
-    name: Faker::Internet.username,
-    address: Faker::Address.full_address,
-    phone_number: Faker::PhoneNumber.phone_number,
-    password: Faker::Alphanumeric.alpha(number: 10)
-  )
-end
-
 puts "adding Equipment"
 
 User.all.each do |user|
-  2.times do (
+  4.times do (
     Equipment.create!(
       description: Faker::Lorem.paragraph(sentence_count: 3),
       ad_name: Faker::Lorem.sentence,
