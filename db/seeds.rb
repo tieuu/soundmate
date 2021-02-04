@@ -16,7 +16,7 @@ puts "adding users"
 User.create!(
   email: "dan@gmail.com",
   name: "dan",
-  address: Faker::Address.full_address,
+  address: "Tokyo Station",
   phone_number: Faker::PhoneNumber.phone_number,
   password: "soundmate1"
 )

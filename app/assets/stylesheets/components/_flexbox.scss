@@ -1,0 +1,21 @@
+
+.flex-container {
+display: flex;
+justify-content: center;
+}
+.flex-large {
+  display: flex;
+  width: 400px;
+  height: 400px;
+}
+
+.flex-small {
+  display: flex;
+  max-width: 50%;
+  width: 200px;
+  height: 200px;
+
+  flex-direction: column;
+}
+
+

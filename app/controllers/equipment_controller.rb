@@ -30,6 +30,7 @@ class EquipmentController < ApplicationController
     @booking = Booking.new
     authorize @booking
     authorize @equipment
+    @marker = [{ lat: @equipment.user.latitude, lng: @equipment.user.longitude }]
   end
 
   private
