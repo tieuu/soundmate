@@ -20,4 +20,10 @@ class Equipment < ApplicationRecord
       Equipment.where('ad_name ILIKE ?', "%#{search[:query]}%")
     end
   end
+
+  def status_check?
+    self.bookings.each do |booking|
+      return ['pending, confirmed'].include?(booking.status.downcase)
+    end
+  end
 end
