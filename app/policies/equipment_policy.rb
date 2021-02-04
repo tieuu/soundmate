@@ -20,4 +20,9 @@ class EquipmentPolicy < ApplicationPolicy
   def my_equipment?
     true
   end
+
+  def update?
+    true
+  end
+
 end
