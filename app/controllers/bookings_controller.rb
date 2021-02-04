@@ -21,7 +21,6 @@ class BookingsController < ApplicationController
   end
 
   def update
-    binding.pry
     @booking.update(booking_params)
     @bookings = Booking.all
     authorize @bookings
