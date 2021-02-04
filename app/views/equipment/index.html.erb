@@ -35,10 +35,10 @@
             <% end %>
             <div class="card-trip-infos">
               <div>
-                <h2 id="black"><%= equipment.ad_name %></h2>
-                <p id="black"><%= equipment.category.capitalize %></p>
+                <h2><%= equipment.ad_name %></h2>
+                <p><%= equipment.category.capitalize %></p>
               </div>
-              <h2 class="card-trip-pricing" id="black"><%= ActiveSupport::NumberHelper.number_to_currency(equipment.price, locale: :ja) %> / day</h2>
+              <h2 class="card-trip-pricing"><%= ActiveSupport::NumberHelper.number_to_currency(equipment.price, locale: :ja) %> / day</h2>
             </div>
           </div>
         <% end %>

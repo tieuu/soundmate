@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :equipment, only: [:index, :show, :create] do
     resources :bookings, only: [:new, :create, :edit, :update]
+    resources :reviews, only: [ :new, :create ]
   end
 
   resources :bookings, only: [:show, :index, :update]
