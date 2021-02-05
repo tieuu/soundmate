@@ -27,7 +27,7 @@
     <% @equipments.each do |equipment| %>
       <% if equipment.active && equipment.user != current_user %>
         <%= link_to equipment_path(equipment), class: 'col-12 col-md-6 col-lg-4 my-3 no-decoration' do %>
-          <div class="card-trip card-category">
+          <div class="card-trip h-100">
             <% unless equipment.photos.attached? %>
               <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
             <% else %>

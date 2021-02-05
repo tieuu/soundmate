@@ -2,13 +2,22 @@ class EquipmentController < ApplicationController
   before_action :set_equipment, only: [:show, :update]
 
   def index
-    @equipments = policy_scope(Equipment.search(params[:search]) || Equipment)
+    query = params[:search][:query]
+    category = params[:search][:category]
+    if query.present? && category.present?
+      @equipments = policy_scope(Equipment).search_equipment(query).search_equipment(category)
+    elsif query.present?
+      @equipments = policy_scope(Equipment).search_equipment(query)
+    elsif category.present?
+      @equipments = policy_scope(Equipment).search_equipment(category)
+    else
+      @equipments = policy_scope(Equipment)
+    end
   end
 
   def my_equipment
     @equipments = Equipment.where(user: current_user).order(created_at: :desc)
     authorize @equipments
-
     @equipment = Equipment.new
     authorize @equipment
   end
