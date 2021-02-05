@@ -1,15 +1,17 @@
 class EquipmentController < ApplicationController
-  before_action :set_equipment, only: [:show, :update]
+  before_action :set_equipment, only: %i[show update]
 
   def index
-    query = params[:search][:query]
-    category = params[:search][:category]
-    if query.present? && category.present?
-      @equipments = policy_scope(Equipment).search_equipment(query).search_equipment(category)
-    elsif query.present?
-      @equipments = policy_scope(Equipment).search_equipment(query)
-    elsif category.present?
-      @equipments = policy_scope(Equipment).search_equipment(category)
+    if params[:search].present?
+      query = params[:search][:query]
+      category = params[:search][:category]
+      if query.present? && category.present?
+        @equipments = policy_scope(Equipment).search_equipment(query).search_equipment(category)
+      elsif query.present?
+        @equipments = policy_scope(Equipment).search_equipment(query)
+      elsif category.present?
+        @equipments = policy_scope(Equipment).search_equipment(category)
+      end
     else
       @equipments = policy_scope(Equipment)
     end
