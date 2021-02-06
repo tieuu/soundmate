@@ -19,7 +19,9 @@
             </div>
             <div class="flex-small">
               <%= cl_image_tag(@equipment.photos[1].key, crop: :fill) %>
-              <%= cl_image_tag(@equipment.photos[2].key, crop: :fill) %>
+              <% if @equipment.photos.count > 2 %>
+                <%= cl_image_tag(@equipment.photos[2].key, crop: :fill) %>
+              <% end %>
             </div>
           <% elsif @equipment.photos.count == 1 %>
             <div class="flex-large">
