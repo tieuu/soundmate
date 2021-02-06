@@ -40,8 +40,8 @@
   </div>
   <div class="row pt-3">
     <% @equipments.select { |equipment| equipment.user == current_user }.each do |equipment| %>
-      <div class="col-12">
-        <div class="card-product">
+      <div class="col-6">
+        <div class='card-product <%= 'opacity-3' unless equipment.active? %>'>
           <% unless equipment.photos.attached? %>
             <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
           <% else %>
@@ -55,10 +55,10 @@
                 <p><%= ActiveSupport::NumberHelper.number_to_currency(equipment.price.round, locale: :ja) %>/day</p>
               </div>
             <% end %>
-            <div class="m-3">
+            <div class='m-3'>
               <%= simple_form_for equipment, method: 'patch' do |f| %>
                 <% if equipment.active? %>
-                  <button <%= 'disabled' if equipment.status_check? %> type="submit" class='btn btn-outline-danger btn-md mx-3 my-1' value='<%= false %>' name='active'>Deactivate</button>
+                  <button <%= 'disabled' if equipment.status_check? %> type="submit" class='btn btn-outline-danger btn-md mx-3 my-1 opacity-5' value='<%= false %>' name='active'>Deactivate</button>
                 <% else %>
                   <button type="submit" class='btn btn-outline-success btn-md mx-3 my-1' value='<%= true %>' name='active'>Activate</button>
                 <% end %>

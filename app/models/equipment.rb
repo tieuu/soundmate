@@ -11,14 +11,17 @@ class Equipment < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_equipment,
-                  against: %i[category description ad_name],
-                  using: {
-                    tsearch: { prefix: true }
-                  }
+    against: %i[category description ad_name],
+  using: {
+    tsearch: { prefix: true }
+  }
 
   def status_check?
-    self.bookings.each do |booking|
-      return ['pending, confirmed'].include?(booking.status.downcase)
+    unless self.bookings.nil?
+      self.bookings.each do |booking|
+        return %w[pending confirmed].include?(booking.status.downcase)
+      end
     end
+    false
   end
 end
