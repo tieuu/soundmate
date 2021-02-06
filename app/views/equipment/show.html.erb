@@ -11,21 +11,23 @@
   </div>
   <div class="card-trip">
     <div class="flex-container">
-      <div class="flex-container col 10">
+      <div class="flex-container col-10">
         <% unless @equipment.photos.attached? %>
           <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
         <% else %>
           <div class="flex-large">
             <%= cl_image_tag(@equipment.photos.first.key, crop: :fill) %>
           </div>
-          <div class="flex-small">
-            <%= cl_image_tag(@equipment.photos[1].key, crop: :fill) %>
-            <%= cl_image_tag(@equipment.photos[2].key, crop: :fill) %>
-            <%= link_to "See more pictures", @equipment_path %>
-          </div>
+          <% if @equipment.photos.count > 1 %>
+            <div class="flex-small">
+              <%= cl_image_tag(@equipment.photos[1].key, crop: :fill) %>
+              <%= cl_image_tag(@equipment.photos[2].key, crop: :fill) %>
+              <%= link_to "See more pictures", @equipment_path %>
+            </div>
+          <% end %>
         <% end %>
       </div>
-      <div class="flex-container col 2">
+      <div class="flex-container col-2">
         <div class="flex-map">
           <div id="map"
         style="width: 100%; height: 600px;"
