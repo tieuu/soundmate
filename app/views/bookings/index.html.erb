@@ -6,10 +6,9 @@
       </div>
     </div>
   </div>
-
   <div class="row">
     <% @bookings.select { |booking| booking.user == current_user }.sort_by{ |booking| booking.start_date }.each do |booking| %>
-      <div class="col-12">
+      <div class="col-6">
         <div class="card-product">
           <% unless booking.equipment.photos.attached? %>
             <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
