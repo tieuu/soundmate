@@ -1,5 +1,5 @@
 const changeStatusColor = () => {
-  const allStatus = document.querySelectorAll('.status');
+  const allStatus = document.querySelectorAll('.status-colorize');
   allStatus.forEach((status) => {
     switch (status.innerText.toLowerCase()) {
       case 'pending':
