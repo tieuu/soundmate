@@ -41,17 +41,17 @@
       </div>
     </div>
   </div>
-<div class="flex-container col-12" >
-  <div class="flex-info col-8">
-    <div class="card-trip my-3 text-center" style="background: white;">
-      <ul class="list-group list-group-flush text-center" style="width: 100%;">
-        <li class="list-group-item border-0 text-center" id="black"> <%= @equipment.description %></li>
-        <li class="list-group-item border-top-0 text-center" id="black"> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %></li>
-        <li class="list-group-item border-top-0 border-bottom-0 text-center" id="black">Rented by: <%= @equipment.user.name %></li>
-        <li class="list-group-item border-bottom-0 text-center" id="black">Location: <%= @equipment.user.address %> </li>
-      </ul>
+  <div class="flex-container col-12" >
+    <div class="flex-info col-8">
+      <div class="card-trip my-3 text-center" style="background: white;">
+        <ul class="list-group list-group-flush text-center" style="width: 100%;">
+          <li class="list-group-item border-0 text-center" id="black"> <%= @equipment.description %></li>
+          <li class="list-group-item border-top-0 text-center" id="black"> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %></li>
+          <li class="list-group-item border-top-0 border-bottom-0 text-center" id="black">Owner: <%= @equipment.user.name %></li>
+          <li class="list-group-item border-bottom-0 text-center" id="black">Location: <%= @equipment.user.address %> </li>
+        </ul>
+      </div>
     </div>
-  </div>
   <% if @equipment.active && @equipment.user != current_user %>
     <div class="flex-form col-sm-4 padding-top: 30px">
       <h2>Rent Now</h2>
