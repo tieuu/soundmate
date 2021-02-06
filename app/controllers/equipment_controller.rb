@@ -1,5 +1,5 @@
 class EquipmentController < ApplicationController
-  before_action :set_equipment, only: %i[show update count_pending]
+  before_action :set_equipment, only: %i[show update count_status]
 
   def index
     @equipments = policy_scope(Equipment)
@@ -49,9 +49,15 @@ class EquipmentController < ApplicationController
     redirect_to my_equipment_path(anchor: "equipment-#{@equipment.id}")
   end
 
-  def count_pending
+  def count_status
     respond_to do |format|
-      format.json { render json: { pending_equipment: @equipment.bookings.where(status: 'pending') } }
+      format.html
+      format.json do
+        render json: {
+          pending_equipment: @equipment.bookings.where(status: 'pending'),
+          confirmed_equipment: @equipment.bookings.where(status: 'confirmed')
+        }
+      end
     end
   end
 
