@@ -24,7 +24,7 @@
               <p><%= ActiveSupport::NumberHelper.number_to_currency((booking.equipment.price * (booking.end_date.to_date - booking.start_date.to_date + 1)).round, locale: :ja) %></p>
             <% end %>
             <div class="row mt-3">
-              <h2 class='mx-3'><%= booking.status.capitalize %></h2>
+              <h2 class='mx-3 status-colorize'><%= booking.status.capitalize %></h2>
               <% if booking.status == "returned" %>
                 <button type="button" class="btn btn-outline-warning btn-md mx-3" data-toggle="modal" data-target="new_equipment_review_path(booking.equipment)">
                   Review
