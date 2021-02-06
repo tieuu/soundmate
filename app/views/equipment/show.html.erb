@@ -43,18 +43,18 @@
       </div>
     </div>
   </div>
-  <div class="flex-container col-12" >
-    <div class="flex-info col-8">
-      <div class="card-trip my-3 text-center" style="background: white;">
-        <ul class="list-group list-group-flush text-center" style="width: 100%;">
-          <li class="list-group-item border-0 text-center" id="black"> <%= @equipment.description %></li>
-          <li class="list-group-item border-top-0 text-center" id="black"> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %></li>
-          <li class="list-group-item border-top-0 border-bottom-0 text-center" id="black">Owner: <%= @equipment.user.name %></li>
-          <li class="list-group-item border-bottom-0 text-center" id="black">Location: <%= @equipment.user.address %> </li>
-        </ul>
+  <% if @equipment.active && @equipment.user != current_user %>
+    <div class="flex-container col-12" >
+      <div class="flex-info col-8">
+        <div class="card-trip my-3 text-center" style="background: white;">
+          <ul class="list-group list-group-flush text-center" style="width: 100%;">
+            <li class="list-group-item border-0 text-center" id="black"> <%= @equipment.description %></li>
+            <li class="list-group-item border-top-0 text-center" id="black"> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %></li>
+            <li class="list-group-item border-top-0 border-bottom-0 text-center" id="black">Owner: <%= @equipment.user.name %></li>
+            <li class="list-group-item border-bottom-0 text-center" id="black">Location: <%= @equipment.user.address %> </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <% if @equipment.active && @equipment.user != current_user %>
       <div class="flex-form col-sm-4 padding-top: 30px">
         <h2>Rent Now</h2>
         <%= simple_form_for [@equipment, @booking] do |f|  %>
@@ -69,8 +69,23 @@
           <%= f.submit "Confirm booking", class: "btn btn-outline-light btn-md my-3" %>
         <% end %>
       </div>
-    <% elsif @equipment.user == current_user %>
-      <ul class="list-group">
+    </div>
+  <% elsif @equipment.user == current_user %>
+    <div class="flex-form col-12">
+      <div class="card-trip my-3 text-center" style="background: white;">
+        <ul class="list-group list-group-flush text-center" style="width: 100%;">
+          <li class="list-group-item border-0 text-center" id="black"> <%= @equipment.description %></li>
+          <li class="list-group-item border-top-0 text-center" id="black"> <%= ActiveSupport::NumberHelper.number_to_currency(@equipment.price, locale: :ja) %></li>
+          <li class="list-group-item border-top-0 border-bottom-0 text-center" id="black">Owner: <%= @equipment.user.name %></li>
+          <li class="list-group-item border-bottom-0 text-center" id="black">Location: <%= @equipment.user.address %> </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container text-center">
+      <h2>Bookings</h2>
+    </div>
+    <div class="flex-form col-12 padding-top: 30px">
+      <ul class="list-group list-group-flush text-center">
         <% @equipment.bookings.each do |booking| %>
           <li class="list-group-item">
             <div class="row justify-content-between align-items-center">
@@ -83,23 +98,23 @@
               <h3 class='status'>
                 <%= booking.status.capitalize %>
               </h3>
-            </div>
-            <div>
-              <%= simple_form_for booking, method: 'patch' do |f| %>
-                <% if booking.status == 'pending' %>
-                  <button type="submit" class='btn btn-outline-success btn-md mx-3 my-1' value='confirmed' name='status'>Accept</button>
-                  <br>
-                  <button type="submit" class='btn btn-outline-warning btn-md mx-3 my-1' value='cancelled' name='status'>Cancel</button>
-                <% elsif booking.status == 'confirmed' %>
-                  <button type="submit" class='btn btn-outline-info btn-md mx-3 my-1' value='returned' name='status'>Returned</button>
+              <div>
+                <%= simple_form_for booking, method: 'patch' do |f| %>
+                  <% if booking.status == 'pending' %>
+                    <button type="submit" class='btn btn-outline-success btn-md mx-3 my-1' value='confirmed' name='status'>Accept</button>
+                    <button type="submit" class='btn btn-outline-warning btn-md mx-3 my-1' value='cancelled' name='status'>Cancel</button>
+                  <% elsif booking.status == 'confirmed' %>
+                    <button type="submit" class='btn btn-outline-info btn-md mx-3 my-1' value='returned' name='status'>Returned</button>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
             </div>
           </li>
         <% end %>
       </ul>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+
   <div class="container text-center">
     <h2>Reviews</h2>
     <ul class="list-group list-group-flush text-center" style="width: 100%;">
