@@ -91,13 +91,15 @@
               </div>
             <% end %>
           </div>
-          <%= simple_form_for booking, method: 'patch' do |f| %>
-            <% if booking.status == 'pending' %>
-              <button type="submit" class='btn btn-outline-success btn-md mx-3 my-1' value='confirmed' name='status'>Accept</button>
-              <br>
-              <button type="submit" class='btn btn-outline-warning btn-md mx-3 my-1' value='cancelled' name='status'>Cancel</button>
-            <% elsif booking.status == 'confirmed' %>
-              <button type="submit" class='btn btn-outline-info btn-md mx-3 my-1' value='returned' name='status'>Returned</button>
+          <% unless current_user == @equipment.user %>
+            <%= simple_form_for booking, method: 'patch' do |f| %>
+              <% if booking.status == 'pending' %>
+                <button type="submit" class='btn btn-outline-success btn-md mx-3 my-1' value='confirmed' name='status'>Accept</button>
+                <br>
+                <button type="submit" class='btn btn-outline-warning btn-md mx-3 my-1' value='cancelled' name='status'>Cancel</button>
+              <% elsif booking.status == 'confirmed' %>
+                <button type="submit" class='btn btn-outline-info btn-md mx-3 my-1' value='returned' name='status'>Returned</button>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
