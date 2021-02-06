@@ -2,12 +2,15 @@
   overflow: hidden;
   background: $light-gray;
   position: relative;
+    justify-content: space-between;
+width: 100%;
 }
 
 .card-trip > img {
   height: 200px;
   width: 100%;
   object-fit: cover;
+  justify-content: space-between;
 }
 
 .card-trip h2 {
