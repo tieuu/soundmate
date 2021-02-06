@@ -25,4 +25,7 @@ class EquipmentPolicy < ApplicationPolicy
     true
   end
 
+  def count_status?
+    true
+  end
 end
