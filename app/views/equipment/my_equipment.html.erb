@@ -7,7 +7,7 @@
     </div>
     <div class="row">
       <div class="col-10 offset-1 col-lg-8 offset-lg-2 my-3">
-        <%= simple_form_for @equipment, wrapper: :input_group do |f| %>
+        <%= simple_form_for @equipment, remote: true, wrapper: :input_group do |f| %>
           <%= f.input :category,
                 collection: Equipment::CATEGORY,
                 label: false,
@@ -41,7 +41,7 @@
   <div class="row pt-3">
     <% @equipments.select { |equipment| equipment.user == current_user }.each do |equipment| %>
       <div class="col-6">
-        <div class='card-product <%= 'opacity-3' unless equipment.active? %>'>
+        <div class='card-product <%= 'opacity-3' unless equipment.active? %>' id="equipment-<%= equipment.id %>">
           <% unless equipment.photos.attached? %>
             <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
           <% else %>
@@ -56,9 +56,9 @@
               </div>
             <% end %>
             <div class='m-3'>
-              <%= simple_form_for equipment, method: 'patch' do |f| %>
+              <%= simple_form_for equipment, remote: true, method: 'patch' do |f| %>
                 <% if equipment.active? %>
-                  <button <%= 'disabled' if equipment.status_check? %> type="submit" class='btn btn-outline-danger btn-md mx-3 my-1 opacity-5' value='<%= false %>' name='active'>Deactivate</button>
+                  <button <%= 'disabled' if equipment.status_check? %> type="submit" class='btn btn-outline-danger btn-md mx-3 my-1' value='<%= false %>' name='active'>Deactivate</button>
                 <% else %>
                   <button type="submit" class='btn btn-outline-success btn-md mx-3 my-1' value='<%= true %>' name='active'>Activate</button>
                 <% end %>

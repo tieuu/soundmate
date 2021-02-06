@@ -47,7 +47,7 @@ class EquipmentController < ApplicationController
   def update
     @equipment.update(active: params[:active])
     authorize @equipment
-    redirect_to my_equipment_path
+    redirect_to my_equipment_path(anchor: "equipment-#{@equipment.id}")
   end
 
   private
