@@ -30,7 +30,8 @@ import { changeStatusColor } from '../components/_status_color';
 changeStatusColor();
 
 import { initMapbox } from '../plugins/init_mapbox';
-console.log('teststring')
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
 })
+
+import "controllers"

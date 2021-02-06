@@ -1,7 +1,8 @@
 class EquipmentController < ApplicationController
-  before_action :set_equipment, only: %i[show update]
+  before_action :set_equipment, only: %i[show update count_pending]
 
   def index
+    @equipments = policy_scope(Equipment)
     if params[:search].present?
       query = params[:search][:query]
       category = params[:search][:category]
@@ -12,8 +13,6 @@ class EquipmentController < ApplicationController
       elsif category.present?
         @equipments = policy_scope(Equipment).search_equipment(category)
       end
-    else
-      @equipments = policy_scope(Equipment)
     end
   end
 
@@ -47,7 +46,13 @@ class EquipmentController < ApplicationController
   def update
     @equipment.update(active: params[:active])
     authorize @equipment
-    redirect_to my_equipment_path
+    redirect_to my_equipment_path(anchor: "equipment-#{@equipment.id}")
+  end
+
+  def count_pending
+    respond_to do |format|
+      format.json { render json: { pending_equipment: @equipment.bookings.where(status: 'pending') } }
+    end
   end
 
   private
