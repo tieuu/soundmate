@@ -5,9 +5,9 @@ class ReviewPolicy < ApplicationPolicy
     end
   end
 
-  # def new?
-  #   true
-  # end
+  def new?
+    true
+  end
 
   def create?
     user != record.equipment.user

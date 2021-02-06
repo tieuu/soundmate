@@ -2,7 +2,7 @@
   <div class="flick-title banner">
     <div class="row">
       <div class="col-10 offset-1 col-lg-8 offset-lg-2 my-3">
-        <h2 class='m-5'>Deals</h2>
+        <h2 class='m-5'>Equipment</h2>
       </div>
     </div>
     <div class="row">
@@ -22,7 +22,6 @@
       </div>
     </div>
   </div>
-
   <div class="row pt-3">
     <% @equipments.each do |equipment| %>
       <% if equipment.active && equipment.user != current_user %>

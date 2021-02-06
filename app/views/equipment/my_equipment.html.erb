@@ -40,39 +40,37 @@
   </div>
   <div class="row pt-3">
     <% @equipments.select { |equipment| equipment.user == current_user }.each do |equipment| %>
-      <div class="col-12">
-        <div class="card-product" id='equipment-<%= equipment.id %>' data-controller="counter" data-counter-id=<%= equipment.id %>>
+      <div class="col-12 col-lg-6">
+        <div class='card-product <%= 'opacity-3' unless equipment.active? %>' id="equipment-<%= equipment.id %>" data-controller="counter" data-counter-id=<%= equipment.id %>>
           <% unless equipment.photos.attached? %>
             <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
           <% else %>
             <%= cl_image_tag(equipment.photos.first.key, crop: :fill) %>
           <% end %>
-          <div class="row">
-            <div class="col-12">
-              <%= link_to equipment_path(equipment), class: 'no-decoration' do %>
-                <div class="card-product-infos">
-                  <h2><%= equipment.ad_name %> </h2>
-                  <p><%= equipment.category.capitalize %> from <%= equipment.user.name.capitalize %></p>
-                  <p><%= ActiveSupport::NumberHelper.number_to_currency(equipment.price.round, locale: :ja) %>/day</p>
-                </div>
-              <% end %>
-              <div class="m-3">
-                <%= simple_form_for equipment, remote: true, method: 'patch' do |f| %>
-                  <% if equipment.active? %>
-                    <button <%= 'disabled' if equipment.status_check? %> type="submit" class='btn btn-outline-danger btn-md mx-3 my-1' value='<%= false %>' name='active'>Deactivate</button>
-                  <% else %>
-                    <button type="submit" class='btn btn-outline-success btn-md mx-3 my-1' value='<%= true %>' name='active'>Activate</button>
-                  <% end %>
+          <div>
+            <%= link_to equipment_path(equipment), class: 'no-decoration' do %>
+              <div class="card-product-infos">
+                <h2><%= equipment.ad_name %> </h2>
+                <p><%= equipment.category.capitalize %> owned by <%= equipment.user.name.capitalize %></p>
+                <p><%= ActiveSupport::NumberHelper.number_to_currency(equipment.price.round, locale: :ja) %>/day</p>
+              </div>
+            <% end %>
+            <div class="m-3">
+              <%= simple_form_for equipment, remote: true, method: 'patch' do |f| %>
+                <% if equipment.active? %>
+                  <button <%= 'disabled' if equipment.status_check? %> type="submit" class='btn btn-outline-danger btn-md mx-3 my-1' value='<%= false %>' name='active'>Deactivate</button>
+                <% else %>
+                  <button type="submit" class='btn btn-outline-success btn-md mx-3 my-1' value='<%= true %>' name='active'>Activate</button>
                 <% end %>
-              </div>
-              <div class="m-1 ml-4">
-                <button type="button" class="btn btn-success" disabled>Comfirmed
-                  <span class="badge badge-light" data-counter-target="countConfirmed">0</span>
-                </button>
-                <button type="button" class="btn btn-warning" disabled>Pending
-                  <span class="badge badge-light" data-counter-target="countPending">0</span>
-                </button>
-              </div>
+              <% end %>
+            </div>
+            <div class="m-1 ml-4">
+              <button type="button" class="btn btn-success" disabled>Comfirmed
+                <span class="badge badge-light" data-counter-target="countConfirmed">0</span>
+              </button>
+              <button type="button" class="btn btn-warning" disabled>Pending
+                <span class="badge badge-light" data-counter-target="countPending">0</span>
+              </button>
             </div>
           </div>
         </div>

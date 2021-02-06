@@ -6,10 +6,9 @@
       </div>
     </div>
   </div>
-
   <div class="row">
     <% @bookings.select { |booking| booking.user == current_user }.sort_by{ |booking| booking.start_date }.each do |booking| %>
-      <div class="col-12">
+      <div class="col-6">
         <div class="card-product">
           <% unless booking.equipment.photos.attached? %>
             <%= cl_image_tag('nd6mdgkmkyp5fok5ig9n.png', crop: :fill) %>
@@ -19,14 +18,34 @@
           <div class="card-product-infos">
             <%= link_to equipment_path(booking.equipment), class: 'no-decoration' do %>
               <h2><%= booking.equipment.ad_name %></h2>
-              <p><%= booking.equipment.category.capitalize %> from <%= booking.equipment.user.name.capitalize %></p>
+              <p><%= booking.equipment.category.capitalize %> owned by <%= booking.equipment.user.name.capitalize %></p>
               <p><%= l(booking.start_date.to_date, format: :long) %> to <%= l(booking.end_date.to_date, format: :long) %></p>
               <p><%= ActiveSupport::NumberHelper.number_to_currency((booking.equipment.price * (booking.end_date.to_date - booking.start_date.to_date + 1)).round, locale: :ja) %></p>
             <% end %>
             <div class="row mt-3">
               <h2 class='mx-3 status-colorize'><%= booking.status.capitalize %></h2>
               <% if booking.status == "returned" %>
-                <%= link_to 'Review', new_equipment_review_path(booking.equipment), class: 'btn btn-outline-primary btn-md mx-3' %>
+                <button type="button" class="btn btn-outline-warning btn-md mx-3" data-toggle="modal" data-target="#exampleModalCenter">
+                  Review
+                </button>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">My review</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <%= simple_form_for [ booking.equipment, @review ] do |f| %>
+                          <%= f.input :content, label: false %>
+                          <%= f.submit "Submit review", class: "btn btn-outline-warning btn-md" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               <% elsif booking.start_date > Time.now && booking.status != 'cancelled' %>
                 <%= simple_form_for booking, method: 'patch' do |f| %>
                   <button type="submit" class='btn btn-outline-warning btn-md mx-3' value='cancelled' name='status'>Cancel</button>
