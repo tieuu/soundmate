@@ -1,11 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :set_equipment
 
-  def new
-    @review = Review.new
-    @review.equipment = @equipment
-    authorize @review
-  end
+  # def new
+  # end
 
   def create
     @review = Review.new(review_params)

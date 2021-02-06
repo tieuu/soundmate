@@ -26,7 +26,7 @@
             <div class="row mt-3">
               <h2 class='mx-3 status-colorize'><%= booking.status.capitalize %></h2>
               <% if booking.status == "returned" %>
-                <button type="button" class="btn btn-outline-warning btn-md mx-3" data-toggle="modal" data-target="new_equipment_review_path(booking.equipment)">
+                <button type="button" class="btn btn-outline-warning btn-md mx-3" data-toggle="modal" data-target="#exampleModalCenter">
                   Review
                 </button>
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -39,14 +39,10 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <%= simple_form_for [ @equipment, @review ] do |f| %>
-                          <%= f.input :content %>
-                          <%= f.submit "Submit review", class: "btn btn-primary" %>
+                        <%= simple_form_for [ booking.equipment, @review ] do |f| %>
+                          <%= f.input :content, label: false %>
+                          <%= f.submit "Submit review", class: "btn btn-outline-warning btn-md" %>
                         <% end %>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                       </div>
                     </div>
                   </div>
